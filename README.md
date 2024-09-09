@@ -1,13 +1,13 @@
-# Merkle Tree Based Airdrop
+# Merkle Tree-Based Airdrop
 
 
 ---
 
 
 
-This repository contains a smart contract implementation of a Merkle Airdrop and the accompanying JavaScript scripts to generate and verify Merkle proofs. The airdrop allows users to claim tokens using Merkle proofs, which ensures that only eligible addresses can claim the tokens. 
+This repository provides a smart contract implementation for a Merkle-based airdrop, along with JavaScript scripts for generating and verifying Merkle proofs. The airdrop mechanism uses Merkle proofs to ensure that only eligible addresses can claim tokens.
 
->> Note : every address here is from the hardhat testsuite you can check script to create it in your hardhat enivornment .
+>> Note: All addresses used in this implementation are derived from the Hardhat test suite. You can refer to the script for creating these addresses within your Hardhat environment.
 
 ## Table of Contents
 - [Setup and Installation](#setup-and-installation)
@@ -20,7 +20,7 @@ This repository contains a smart contract implementation of a Merkle Airdrop and
 
 ### Prerequisites
 
-Ensure you have the following installed:
+Make sure you have the following installed:
 - Node.js
 - Hardhat
 
@@ -30,6 +30,7 @@ Ensure you have the following installed:
     ```bash
     git clone https://github.com/LayintonDev/airdrop.git
     cd airdrop
+
     ```
 
 2. Install dependencies:
@@ -46,24 +47,23 @@ Ensure you have the following installed:
 
 2. **Deploy the contracts:**
 
-    You can deploy the `LayiAirDrop` contract by running the deployment script (make sure to set up your Hardhat network configuration):
+    Deploy the `LayiAirDrop` contract using the deployment script. Ensure your Hardhat network configuration is set up:
     ```bash
-    npx hardhat run scripts/deploy.js --network <network-name>
+    npx hardhat run scripts/deploy.ts --network <network-name>
     ```
 
 3. **Contract Details:**
-    - **LayiAirDrop Contract:** This contract handles the airdrop logic, including proof verification and token distribution.
+    - **LayiAirDrop Contract:** This contract manages the airdrop process, including verifying proofs and distributing tokens.
 
 ## Generating Merkle Trees and Proofs
 
 ### Generating the Merkle Tree
 
 1. **Create the Merkle Tree:**
-    The `createmerkletrees.js` script generates a Merkle tree from a predefined list of addresses and token amounts.
-    Do well to edit the file for your own use
+    Use the `generateMerkletrees.ts` script to create a Merkle tree from a predefined set of addresses and token amounts. Modify this script as needed for your use case.
 
     ```bash
-    node createmerkletrees.js
+    node generateMerkletrees.ts
     ```
 
     This will create a `tree.json` file in the root directory containing the Merkle tree data.
@@ -71,10 +71,10 @@ Ensure you have the following installed:
 ### Generating Merkle Proofs
 
 1. **Create Merkle Proofs:**
-    The `createmerkleproof.js` script is used to generate Merkle proofs for specific addresses in our case "0x90F79bf6EB2c4f870365E785982E1f101E93b906". You can modify the script to generate proofs for other addresses.
+    The `generateMerkleproof.ts` script is used to generate Merkle proofs for specific addresses in our case "0x90F79bf6EB2c4f870365E785982E1f101E93b906". You can modify the script to generate proofs for other addresses.
 
     ```bash
-    node createmerkleproof.js
+    node generateMerkleproof.ts
     ```
 
     The proof for the specified address will be output to the console.
@@ -101,11 +101,10 @@ Ensure you have the following installed:
 
 - **Decimal Handling:** The implementation assumes that the decimals for token amounts are handled externally and that the `amount` parameter passed to the `claimAirDrop` function is already formatted correctly.
   
-- **Tree and Proof Generation:** The scripts provided (`createmerkletrees.js` and `createmerkleproof.js`) generate trees and proofs based on predefined values. You should modify the values to suit your airdrop requirements.
+- **Tree and Proof Generation:** The scripts provided (`generateMerkletrees.ts` and `generateMerkleproof.ts`) generate trees and proofs based on predefined values. You should modify the values to suit your airdrop requirements.
 
-- **Preimage Attack Protection:** The `_verifyProof` function in the `MerkleDrop` contract double-hashes the data to prevent second preimage attacks.
+- **Preimage Attack Protection:** The `_verifyProof` function in the `LayiAirdrop` contract double-hashes the data to prevent second preimage attacks.
 
-- **Active Airdrop Toggle:** The contract includes a `toggleActive` function that allows the owner to enable or disable the airdrop claiming process.
 
 ## Running Tests
 
